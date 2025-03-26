@@ -17,6 +17,16 @@ Besides, having a dedicated instance running for few hours will cost you way les
 
 Basicly, I am bored about not be able to watch Sports on TV while being remote.
 
+## Main features
+
+* Get your own VPN in few minutes
+
+* Inbound traffic limited to wireguard process
+
+* Cheaper than traditional VPN Providers for short term usages
+
+* You got a QR Code for Mobile devices
+
 ## Prerequisites
 
 * Having an AWS Account
@@ -24,6 +34,8 @@ Basicly, I am bored about not be able to watch Sports on TV while being remote.
 * Being logged in with AWS Cli - ensure you have the right permissions -
 
 * Having terraform installed
+
+* Having a Wireguard client installed on a laptop or mobile
 
 ## Installation
 
@@ -51,7 +63,58 @@ If you want to check what will be created forehand :
 
 ```
 terraform plan
+```
 
+2. Connection settings are then shared at the end of the provisioner process (don't try, this instance doesn't exist anymore) :
+
+```
+aws_instance.ec2 (remote-exec): █████████████████████████████████████████████████████████████████████
+aws_instance.ec2 (remote-exec): █████████████████████████████████████████████████████████████████████
+aws_instance.ec2 (remote-exec): ████ ▄▄▄▄▄ █▀▄██ ▀  █▀ ██▄▄▀▀▀ ▄▀ ▄▄▄ ▀▀▀█ ▄  ██▀█▄▀▄▄█  █ ▄▄▄▄▄ ████
+aws_instance.ec2 (remote-exec): ████ █   █ █▄▄▀▄▀▄█ ▀▄█ ▄▀   █▀ ▄ ▄██  ▄▀ ▄▀  ▀▀▄ █▄▀  ▄ █ █   █ ████
+aws_instance.ec2 (remote-exec): ████ █▄▄▄█ █ ▀█  ▄ ▀▄ ██▄█▄▄▀▀▄▀ ▄▄▄ █    ██  ▀▄▀▀▄█▀▀ ▄██ █▄▄▄█ ████
+aws_instance.ec2 (remote-exec): ████▄▄▄▄▄▄▄█ ▀ ▀▄█▄█ ▀▄█ █▄▀▄█▄▀ █▄█ ▀ █ █▄▀ █ █ ▀ █▄█▄▀ █▄▄▄▄▄▄▄████
+aws_instance.ec2 (remote-exec): ████▄▄█ ▀█▄ █▄▀ █▀█▀▀ ▀   ▄ ▄     ▄▄▄▀▄█▀██  ▀▄ ▄█▀▀▀▄█▀▄█▄  █▄ █████
+aws_instance.ec2 (remote-exec): ████▄█ ▄  ▄█▀█ ▀█ ▀▄▄▄█ ▄▀▄▀▄▀█▄▀▀█ ▀█▀▀█▀▀▀ █ ▀ █▄▄▄ █▀▀▀▀█ █   ████
+aws_instance.ec2 (remote-exec): ████ █ ▀▄█▄▄ ▄▀█ ▄██▄  ▀▀█▀██▄▄▀ █▄ ▀██ ██▀▀▀ ▄▄▀██ ▀▀▄█▀ █▄█▀▀█▀████
+aws_instance.ec2 (remote-exec): ████  ▀ ▄█▄ ▄███████ ▀▀█ ▀█▀  ▀▀▀▄   ██▀▀▄  █   █▄  ▀▀██  █ ▄ ▄▀▀████
+aws_instance.ec2 (remote-exec): ████ ▄  ▀ ▄▄▄▄▀▀ ▄ ▀██▄▄▄ ▄█   ▀█ ▄ ██▀▄█▄ ▀█▀▀▀█ █▀ ▀ ██▀▀█▄▄█ ▀████
+aws_instance.ec2 (remote-exec): ████▀▀▀▀██▄▄▄▀▀█▄ ██ ▀▄  ▄██▄▄█▀  ▀▄   ▀▄▀▀█ ▀█▄ ▀█▀▄  ▀██ █▄█▄▀█████
+aws_instance.ec2 (remote-exec): ████▀▀█▀▀▀▄▀▀█▀ ▀  ▀▀███▄▀ █ █▄███▄▄▄▀▀▄██▄ ▀▄███▄▄▀██  ▀▄▀▀▄▀  ▀████
+aws_instance.ec2 (remote-exec): ████ ▀▄▄▄ ▄▄▄▀▀▄▀▄████▄▀▄▄▀▀█▀ ██▄▀ ▄█▄ █ ▄▀█▀▄█▀█▄▄ ▄ █▄██▀█▄██▀████
+aws_instance.ec2 (remote-exec): ████ ██ █▄▄█ █▄▀ █▄▀ ▄▀▀▀  ▀     ▀█▀▄▀ ▀▄▀█ ▀█ ▀▄██ █▀▄▀ ▄▄▄ ▀█▄▄████
+aws_instance.ec2 (remote-exec): ████▀▄▀██▄▄ ▄█ ▀ ▄ █▄███▀ ▀█▄▄▄▄ ▄▄▀▄▄▀  ▀█ █▄▀██▀█▀ █ ▀ ▄█▀▀█ █▄████
+aws_instance.ec2 (remote-exec): ████▀▀█  ▄▄▄   ▀█▄▄█ ▄██▄█▄█▀ ▄█ ▄▄▄ ▀▀▄▄▄▄▀▀▀▄ ▀█▀▀█ ▀█ ▄▄▄ ▀█▄ ████
+aws_instance.ec2 (remote-exec): ████▄  ▀ █▄█  █ ██▄ ▄▄██▄▀▄█  ▄▄ █▄█ ▀█ ▀ ▄▀▀▀█▀█▀ █▀▀▀█ █▄█ ▄▄ ▀████
+aws_instance.ec2 (remote-exec): ████▀▀ ▀▄ ▄ ▄▄▀   ▀ ▄▀▀▀  ██▀ ▄█ ▄ ▄▄█  ██▄▀▄▄ ▀▄▀▄█ ▀▄▀   ▄ ▄█▀ ████
+aws_instance.ec2 (remote-exec): █████ ▀▄▄▄▄█▀  █▀ ▄▀ █▀ ▄ █▀█   █▄▀▄▄▄▀▄▄ █ ▀█▄ █ ▀█ █  ██▄▄▀█▀█▀████
+aws_instance.ec2 (remote-exec): ████▄██▄██▄███ ▄ █▀▀▄▄█▀▀▀ ▄▄█▀▀▄ ▀▀█▀███▄▀▀▀█▄▀██▀ █▀█▀█ ▀█ ▄█▀ ████
+aws_instance.ec2 (remote-exec): ████▀▄ ▄  ▄█ █▀▀▄▄▄▀  ▄▄▀▄▄▄▄▀▀ ▀ ▄▀█ ▄▀▀▀▄ ▀▀█▄▄▀   ▄▄▄ ▄ ▀▀████████
+aws_instance.ec2 (remote-exec): ████ ██ █▄▄█  ▄▄█ ▀▀▀██ ▄  █▄▀▄████ █▀▀█ ▄   ▀▄█ █▀▄▀▄ █▀██▄█   █████
+aws_instance.ec2 (remote-exec): ████▀▄██▀▀▄█▄█▄█▄████▀▀▀▀▀▄██▄▀▀█ ▄█▄▄█▀▄██▀▄█▄█▄▀ ▀█▄▀▄  ██▀█▀▀▄████
+aws_instance.ec2 (remote-exec): █████▀ ▀██▄▄█ ██ █ █▄▀█▀ ██   ▄▄▄ ▄▄▀▀ ▀▀▀ ▄ ▀▀  █▀▄█▄▀ █▄ ▄▄█▀  ████
+aws_instance.ec2 (remote-exec): ████▀▀▄▀ █▄▄▄▄▀██ █   █ ▀  ▀▀▀▄▄▀█▀▄▀▀█▀██ █▄██ ██  ▀▄▀▀█▄ █  ▀▄█████
+aws_instance.ec2 (remote-exec): ████ ▀▀ ██▄█████▄ █▄▀▀ ▀▄▄█▄ █▄██ ▄▀ ██▀ █▄▀▀█▀▄█ ▄▄▄█ ██▀▀▄ ▄ ▄ ████
+aws_instance.ec2 (remote-exec): ████▀▀ ▄ ▄▄██▄▄▀█ ███   █▄  █   ▄▀▄ ▀█  ▀ ▄▀█▀  ▄  ▀ ▀  ▀ ████ ▀█████
+aws_instance.ec2 (remote-exec): ████▄▄▄▄██▄▄▀█▀▄▄█▄▀ ▄▀  ▀ █▀▀▄▀ ▄▄▄ █▀█▄█ ▀▄▀██▄█ ██ ▀█ ▄▄▄ ▄▄▄▄████
+aws_instance.ec2 (remote-exec): ████ ▄▄▄▄▄ █▄ ▀  ▀▀▀▀ █▀▄ ▄█▄▄▀▀ █▄█ ▄ █▀▀▄█ ▀▄██▀▄ ▄▄▄█ █▄█ █ ██████
+aws_instance.ec2 (remote-exec): ████ █   █ █▀▄█▀▄  █ ▀▀█▄▀▄▄▀▄▀▀ ▄   █▀ ▄██ █ ▀▄██▀▀██▄▀▄  ▄▄██▀█████
+aws_instance.ec2 (remote-exec): ████ █▄▄▄█ █▀ █▀▀▄▄▄▀█▀ ▀▀█ ▄▀▀ ██▄▀▄  ▄▄ █▀▄█▄▀ ▄██ ▄█▀▄▀ ▀ █ █▄████
+aws_instance.ec2 (remote-exec): ████▄▄▄▄▄▄▄█▄██▄█▄▄█▄▄██▄▄████▄█▄█▄█▄▄▄███▄▄▄▄▄▄██▄█▄█████▄▄██▄▄▄████
+aws_instance.ec2 (remote-exec): █████████████████████████████████████████████████████████████████████
+aws_instance.ec2 (remote-exec): █████████████████████████████████████████████████████████████████████
+aws_instance.ec2 (remote-exec): Scan the QR code above to connect to the WireGuard VPN.
+aws_instance.ec2 (remote-exec): ~~~~~~~~ Copy paste this configuration in your WireGuard client ~~~~~~~~
+aws_instance.ec2 (remote-exec): [Interface]
+aws_instance.ec2 (remote-exec): Address = 10.66.66.2/32,fd42:42:42::2/128
+aws_instance.ec2 (remote-exec): PrivateKey = [PK]
+aws_instance.ec2 (remote-exec): [Peer]
+aws_instance.ec2 (remote-exec): AllowedIPs = 0.0.0.0/0, ::/0
+aws_instance.ec2 (remote-exec): Endpoint = 13.38.53.177:52180
+aws_instance.ec2 (remote-exec): PersistentKeepalive = 25
+aws_instance.ec2 (remote-exec): PublicKey = [PK]
+aws_instance.ec2 (remote-exec): PresharedKey = [PSK]
+aws_instance.ec2 (remote-exec): ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
 ## How to kill the instance

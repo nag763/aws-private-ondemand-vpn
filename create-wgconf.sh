@@ -13,5 +13,8 @@ echo "PublicKey = $(cat server.pub)" >> client.conf
 echo "PresharedKey = $(cat client.psk)" >> client.conf
 qrencode -t ansiutf8 < client.conf
 echo "Scan the QR code above to connect to the WireGuard VPN."
+
+echo "~~~~~~~~ Copy paste this configuration in your WireGuard client ~~~~~~~~"
 cat client.conf
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 rm client.psk *.key *.pub client.conf
