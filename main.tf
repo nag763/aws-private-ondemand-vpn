@@ -91,8 +91,8 @@ resource "aws_vpc_security_group_egress_rule" "outbound" {
 }
 
 # Step 6: Create a Key Pair for SSH Access
-resource "aws_key_pair" "vps" {
-  key_name   = "examplekey"
+resource "aws_key_pair" "ec2" {
+  key_name   = "ec2-key"
   public_key = file("~/.ssh/terraform.pub")
 }
 
@@ -100,7 +100,7 @@ resource "aws_key_pair" "vps" {
 resource "aws_instance" "ec2" {
   ami                         = "ami-0160e8d70ebc43ee1"
   instance_type               = "t2.micro"
-  key_name                    = aws_key_pair.example.vps
+  key_name                    = aws_key_pair.ec2.key_name
   vpc_security_group_ids      = [aws_security_group.allow_tls.id]
   subnet_id                   = aws_subnet.main.id
   associate_public_ip_address = true
