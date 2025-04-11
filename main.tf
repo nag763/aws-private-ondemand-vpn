@@ -98,7 +98,7 @@ resource "aws_key_pair" "ec2" {
 
 # Step 7: Launch an EC2 Instance
 resource "aws_instance" "ec2" {
-  ami                         = "ami-0160e8d70ebc43ee1"
+  ami                         = "ami-0d6259d29f19a709f"
   instance_type               = "t2.micro"
   key_name                    = aws_key_pair.ec2.key_name
   vpc_security_group_ids      = [aws_security_group.allow_tls.id]
@@ -107,13 +107,13 @@ resource "aws_instance" "ec2" {
 
   connection {
     type        = "ssh"
-    user        = "ubuntu"
+    user        = "ec2-user"
     private_key = file("~/.ssh/terraform")
     host        = self.public_ip
   }
 
   provisioner "remote-exec" {
-    scripts = ["./update-sys.sh", "./create-wgconf.sh", "./enable-wg.sh", "deny-ssh.sh"]
+    scripts = ["./generate-client.sh", "./exit-actions.sh"]
   }
 }
 

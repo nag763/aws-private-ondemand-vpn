@@ -21,7 +21,7 @@ Basicly, I am bored about not be able to watch Sports on TV while being remote.
 
 * Get your own VPN in few minutes
 
-* Inbound traffic limited to wireguard process
+* ECS Inbound traffic limited to Wireguard process past provision
 
 * Cheaper than traditional VPN Providers for short term usages
 

@@ -1,3 +1,2 @@
-sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get install -y wireguard qrencode
+sudo dnf update -y
+sudo dnf install -y wireguard-tools qrencode iptables
