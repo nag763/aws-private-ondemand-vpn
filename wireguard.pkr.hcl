@@ -16,6 +16,7 @@ source "amazon-ebs" "wg-ami" {
       name                = "al2023-*"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
+      architecture  = "x86_64"
     }
     most_recent = true
     owners      = ["amazon"]
