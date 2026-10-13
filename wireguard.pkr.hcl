@@ -13,21 +13,28 @@ source "amazon-ebs" "wg-ami" {
   region        = "eu-west-3"
   source_ami_filter {
     filters = {
-      name                = "al2023-*"
+      name                = "al2023-ami-2023.*-x86_64"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
-      architecture  = "x86_64"
+      architecture        = "x86_64"
     }
     most_recent = true
     owners      = ["amazon"]
   }
   ssh_username = "ec2-user"
+
+  launch_block_device_mappings {
+    device_name           = "/dev/xvda"
+    volume_size           = 8
+    volume_type           = "gp3"
+    delete_on_termination = true
+  }
 }
 
 build {
   sources = ["source.amazon-ebs.wg-ami"]
 
   provisioner "shell" {
-    scripts = ["./update-sys.sh", "./create-wgconf.sh", "./enable-wg.sh"]
+    scripts = ["scripts/ami/update-sys.sh", "scripts/ami/enable-wg.sh"]
   }
 }

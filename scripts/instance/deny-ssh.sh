@@ -1,4 +1,2 @@
-sudo systemctl disable ssh.socket
-sudo systemctl stop ssh.socket
-sudo systemctl disable ssh.service
-sudo systemctl stop ssh.service
+#!/usr/bin/env bash
+sudo systemctl mask --now sshd.socket sshd.service ssh.socket ssh.service

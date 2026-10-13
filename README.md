@@ -20,12 +20,11 @@ Basicly, I am bored about not be able to watch Sports on TV while being remote.
 ## Main features
 
 * Get your own VPN in few minutes
-
-* ECS Inbound traffic limited to Wireguard process past provision
-
+* Secure DNS: Mullvad DNS-over-TLS (DoT) enabled via `systemd-resolved` blocking ads, trackers, and malware (`base.dns.mullvad.net`)
+* Hardened security: dynamic instance key generation (no AMI-baked secrets), IMDSv2 enforcement, EBS encryption, and SSH restricted to your IP
+* Inbound traffic strictly limited to WireGuard (UDP)
 * Cheaper than traditional VPN Providers for short term usages
-
-* You got a QR Code for Mobile devices
+* QR Code output for mobile devices
 
 ## Prerequisites
 
@@ -41,28 +40,61 @@ Basicly, I am bored about not be able to watch Sports on TV while being remote.
 
 1. Clone the project
 
-```
+```bash
 git clone https://github.com/nag763/aws-private-ondemand-vpn
+cd aws-private-ondemand-vpn
 ```
 
-2. Init the terraform
+2. Build the AMI (optional if using default AMI):
 
+```bash
+./vpn.sh setup
 ```
+
+## Quick Start with `./vpn.sh`
+
+The included [`vpn.sh`](file:///home/usr/workspace/aws-private-ondemand-vpn/vpn.sh) script automates the entire lifecycle:
+
+* **Setup the AMI:**
+  ```bash
+  ./vpn.sh setup
+  ```
+  Builds the base AMI using Packer and writes the new AMI ID to `terraform.tfvars`.
+
+* **Start & Connect to the VPN:**
+  ```bash
+  ./vpn.sh up
+  ```
+  Deploys the EC2 instance, captures the client configuration, saves it to `/vpn.conf` (and `./vpn.conf`), and automatically establishes the WireGuard connection.
+
+* **Disconnect & Destroy Infrastructure:**
+  ```bash
+  ./vpn.sh down
+  ```
+  Disconnects the WireGuard tunnel and tears down all cloud infrastructure.
+
+* **Delete the AMI:**
+  ```bash
+  ./vpn.sh clean
+  ```
+  Deregisters the created AMI, deletes the associated EBS snapshot, and cleans up `terraform.tfvars`.
+
+* **Help:**
+  ```bash
+  ./vpn.sh help
+  ```
+
+---
+
+## Manual Terraform Workflow
+
+If you prefer running Terraform directly:
+
+1. Init and Apply:
+
+```bash
 terraform init
-```
-
-## How to start a server
-
-1. Run
-
-```
 terraform apply
-```
-
-If you want to check what will be created forehand :
-
-```
-terraform plan
 ```
 
 2. Connection settings are then shared at the end of the provisioner process (don't try, this instance doesn't exist anymore) :
